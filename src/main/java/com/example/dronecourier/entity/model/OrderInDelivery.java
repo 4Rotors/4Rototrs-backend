@@ -3,10 +3,13 @@ package com.example.dronecourier.entity.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.awt.*;
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Table(name = "order_items")
+@Table(name = "in_delivery")
 @Entity
 public class OrderInDelivery {
 
@@ -15,15 +18,18 @@ public class OrderInDelivery {
     @Column(name = "id")
     private Long id;
 
-    @NonNull
-    @Column(name = "location")
-    private String location;
+    @Column(name = "location_x")
+    private Double locationX;
 
-    @NonNull
-    @Column(name = "order_id")
-    private Long orderId;
+    @Column(name = "location_y")
+    private Double locationY;
 
-    @NonNull
-    @Column(name = "dron_id")
-    private Long droneId;
+    @OneToOne
+    @JoinColumn(name = "order_id", referencedColumnName = "id")
+    private Order order;
+
+    @OneToOne
+    @JoinColumn(name = "drone_id", referencedColumnName = "id")
+    private Drone drone;
+
 }

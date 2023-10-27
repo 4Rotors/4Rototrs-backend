@@ -1,12 +1,16 @@
 package com.example.dronecourier.entity.model;
 
+import com.example.dronecourier.entity.model.enums.DroneStatus;
+import com.example.dronecourier.entity.model.enums.DroneType;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Table(name = "drons")
+@Table(name = "drones")
 @Entity
 public class Drone {
     @Id
@@ -14,27 +18,30 @@ public class Drone {
     @Column(name = "id")
     private Long id;
 
-    @NonNull
+
     @Column(name = "name")
     private String name;
 
-    @NonNull
+
     @Column(name = "charge")
     private Integer charge;
 
-    @NonNull
+
     @Column(name = "capacity")
     private Integer capacity;
 
-    @NonNull
+
     @Column(name = "distance")
     private Integer distance;
 
-    @NonNull
+    @Enumerated(EnumType.STRING)
     @Column(name = "type")
-    private String type;
+    private DroneType type;
 
-    @NonNull
+    @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private String status;
+    private DroneStatus status;
+
+    @Column(name = "image")
+    private byte[] image;
 }

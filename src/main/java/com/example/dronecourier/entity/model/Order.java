@@ -1,9 +1,12 @@
 package com.example.dronecourier.entity.model;
 
+import com.example.dronecourier.entity.model.enums.OrderStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,15 +20,16 @@ public class Order {
     @Column(name = "id")
     private Long id;
 
-    @NonNull
     @Column(name = "address_delivery")
     private String deliveryAddress;
 
-    @NonNull
     @Column(name = "status")
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
 
-    @NonNull
     @Column(name = "arrival_date")
     private Date arrivalDate;
+
+    @OneToMany(mappedBy = "order")
+    private List<OrderItem> items;
 }

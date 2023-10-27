@@ -15,23 +15,19 @@ public class OrderItem {
     @Column(name = "id")
     private Long id;
 
-    @NonNull
-    @Column(name = "order_id")
-    private Integer orderId;
-
-    @NonNull
     @Column(name = "name")
     private String name;
 
-    @NonNull
     @Column(name = "count")
     private Integer count;
 
-    @NonNull
     @Column(name = "price")
-    private Integer price;
+    private Double price;
 
-    @NonNull
     @Column(name = "weight")
     private Integer weight;
+
+    @ManyToOne
+    @JoinColumn(name = "order_id", referencedColumnName = "id")
+    private Order order;
 }
