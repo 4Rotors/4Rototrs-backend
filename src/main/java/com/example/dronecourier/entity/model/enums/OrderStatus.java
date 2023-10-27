@@ -1,9 +1,9 @@
 package com.example.dronecourier.entity.model.enums;
 
 public enum OrderStatus {
-    GOING("собирается"),
-    IN_WAY("в пути"),
-    DELIVERED("доставлен");
+    GOING("Собирается"),
+    IN_WAY("В пути"),
+    DELIVERED("Доставлен");
 
     private final String name;
 

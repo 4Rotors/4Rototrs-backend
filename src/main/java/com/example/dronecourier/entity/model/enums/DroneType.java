@@ -1,8 +1,8 @@
 package com.example.dronecourier.entity.model.enums;
 
 public enum DroneType {
-    GROUND("наземный"),
-    AIR("воздушный");
+    GROUND("Наземный"),
+    AIR("Воздушный");
 
 
     private final String name;

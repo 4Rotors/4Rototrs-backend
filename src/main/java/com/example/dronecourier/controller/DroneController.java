@@ -6,11 +6,11 @@ import com.example.dronecourier.entity.model.Drone;
 import com.example.dronecourier.entity.model.enums.DroneStatus;
 import com.example.dronecourier.entity.model.enums.DroneType;
 import com.example.dronecourier.service.DroneService;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,6 +25,24 @@ public class DroneController {
     public List<DroneResponseDto> getDrones() {
         return droneService.getAll().stream().map(this::translateToDto).toList();
     }
+
+    @PostMapping("/create")
+    public ResponseEntity<HttpStatus> addDrone(@RequestBody DroneCreateRequestDto dto){
+        droneService.save(translateToEntity(dto));
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}/delete")
+    public ResponseEntity<HttpStatus> deleteDrone(@PathVariable("id") Long id){
+        droneService.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public DroneResponseDto getDrone(@PathVariable("id") Long id){
+        return translateToDto(droneService.getById(id));
+    }
+
 
     private DroneResponseDto translateToDto(Drone drone) {
         DroneResponseDto dto = new DroneResponseDto();
