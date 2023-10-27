@@ -1,13 +1,11 @@
-package com.example.dronecourier.model;
+package com.example.dronecourier.entity.model;
 
 import jakarta.persistence.*;
 import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
-@ToString
+@Data
 @Table(name = "order_items")
 @Entity
 public class OrderItem {
@@ -15,7 +13,7 @@ public class OrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
 
     @NonNull
     @Column(name = "order_id")

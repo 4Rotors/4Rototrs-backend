@@ -15,6 +15,7 @@
     <description>drone-courier</description>
     <properties>
         <java.version>17</java.version>
+        <openapi.verison>2.2.0</openapi.verison>
     </properties>
     <dependencies>
         <dependency>
@@ -53,6 +54,12 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>${openapi.verison}</version>
         </dependency>
     </dependencies>
 

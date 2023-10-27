@@ -1,20 +1,18 @@
-package com.example.dronecourier.model;
+package com.example.dronecourier.entity.model;
 
 import jakarta.persistence.*;
 import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
-@ToString
+@Data
 @Table(name = "drons")
 @Entity
 public class Drone {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
 
     @NonNull
     @Column(name = "name")
@@ -38,5 +36,5 @@ public class Drone {
 
     @NonNull
     @Column(name = "status")
-    private Integer status;
+    private String status;
 }
