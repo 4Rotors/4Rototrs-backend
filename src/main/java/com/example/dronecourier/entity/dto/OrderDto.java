@@ -1,13 +1,13 @@
 package com.example.dronecourier.entity.dto;
 
+import com.example.dronecourier.entity.model.OrderItem;
 import lombok.Data;
 
-import java.util.Date;
+import java.util.List;
 
 @Data
 public class OrderDto {
-    private Long id;
     private String deliveryAddress;
-    private String status;
-    private Date arrivalDate;
+    private String arrivalDate;
+    private List<OrderItem> items;
 }

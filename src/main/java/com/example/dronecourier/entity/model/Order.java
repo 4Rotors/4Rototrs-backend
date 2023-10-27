@@ -28,7 +28,7 @@ public class Order {
     private OrderStatus status;
 
     @Column(name = "arrival_date")
-    private Date arrivalDate;
+    private String arrivalDate;
 
     @OneToMany(mappedBy = "order")
     private List<OrderItem> items;
