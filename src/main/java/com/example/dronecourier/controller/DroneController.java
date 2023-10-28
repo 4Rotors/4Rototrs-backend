@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/drones")
+@RequestMapping("/api")
 @RequiredArgsConstructor
 public class DroneController {
     private final DroneService droneService;
 
-    @GetMapping()
+    @GetMapping(value = "/drones", produces = {"application/json"})
     public List<DroneResponseDto> getDrones() {
         return droneService.getAll().stream().map(this::translateToDto).toList();
     }
@@ -36,7 +36,7 @@ public class DroneController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/drones/{id}")
     public DroneResponseDto getDrone(@PathVariable("id") Long id) {
         return translateToDto(droneService.getById(id));
     }
