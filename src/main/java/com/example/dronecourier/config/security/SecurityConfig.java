@@ -40,6 +40,7 @@ public class SecurityConfig {
                                 .requestMatchers("/api/auth/signIn", "/api/auth/accessToken").permitAll()
                                 .requestMatchers("/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                                 .requestMatchers("/api/auth/signUp").permitAll()
+                                .anyRequest().authenticated()
                 )
                 .exceptionHandling(
                         exc -> exc.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
