@@ -1,5 +1,6 @@
 package com.example.dronecourier.utils;
 
+import com.example.dronecourier.entity.dto.PointDto;
 import com.example.dronecourier.entity.model.Drone;
 import com.example.dronecourier.entity.model.Order;
 import com.example.dronecourier.entity.model.OrderItem;
@@ -10,10 +11,15 @@ import java.util.List;
 
 public class DroneUtils {
 
-    public static Long calculateDrone(List<Drone> droneList, double startX, double startY,
-                                      double endX, double endY, Order order, List<OrderItem> orderItems) {
+    public static Long calculateDrone(List<Drone> droneList, PointDto startPoint, PointDto endPoint,
+                                      Order order, List<OrderItem> orderItems) {
+        double endY = endPoint.getLocationY();
+        double endX = endPoint.getLocationX();
+        double startY = startPoint.getLocationY();
+        double startX = startPoint.getLocationX();
+
         if (order.getStatus() != OrderStatus.GOING) {
-            return -1L;
+            return 1L;
         }
         for (Drone drone : droneList) {
             if (drone.getStatus() == DroneStatus.READY) {
@@ -31,7 +37,7 @@ public class DroneUtils {
                 }
             }
         }
-        return -1L;
+        return 1L;
     }
 
 }
