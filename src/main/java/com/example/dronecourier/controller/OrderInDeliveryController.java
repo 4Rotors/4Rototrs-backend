@@ -1,6 +1,7 @@
 package com.example.dronecourier.controller;
 
 import com.example.dronecourier.controller.api.OrderInDeliveryApi;
+import com.example.dronecourier.entity.dto.OrderCompleteDto;
 import com.example.dronecourier.entity.dto.OrderInDeliveryDto;
 import com.example.dronecourier.entity.dto.PointDto;
 import com.example.dronecourier.entity.dto.TrackNumberDto;
@@ -16,6 +17,8 @@ import com.example.dronecourier.service.OrderService;
 import com.example.dronecourier.utils.DroneUtils;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -52,8 +55,8 @@ public class OrderInDeliveryController implements OrderInDeliveryApi {
         return points.get(rnd);
     }
 
-    @GetMapping("/drone/{id}")
-    public OrderInDeliveryDto calculateDrone(@PathVariable("id") Long id) {
+    @GetMapping("/send/{orderId}")
+    public OrderInDeliveryDto calculateDrone(@PathVariable("orderId") Long id) {
         Order order = orderService.getOrder(id);
         List<OrderItem> items = orderItemService.getItemsByOrder(order);
         List<Drone> drones = droneService.getAll();
@@ -73,4 +76,19 @@ public class OrderInDeliveryController implements OrderInDeliveryApi {
         );
         return new OrderInDeliveryDto(trackNumber, droneId,  drone.getName());
     }
+
+    @DeleteMapping("/complete")
+    public ResponseEntity<HttpStatus> completeOrder(@RequestBody OrderCompleteDto dto){
+        Order order = orderService.getOrder(dto.getDroneId());
+        Drone drone = droneService.getById(dto.getDroneId());
+
+        order.setStatus(OrderStatus.DELIVERED);
+        drone.setStatus(DroneStatus.READY);
+
+        droneService.save(drone);
+        orderService.save(order);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }
