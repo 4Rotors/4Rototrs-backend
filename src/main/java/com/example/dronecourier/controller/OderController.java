@@ -1,6 +1,7 @@
 package com.example.dronecourier.controller;
 
-import com.example.dronecourier.entity.dto.OrderDto;
+import com.example.dronecourier.entity.dto.order.OrderDto;
+import com.example.dronecourier.entity.dto.order.OrderDtoResponse;
 import com.example.dronecourier.entity.model.Order;
 import com.example.dronecourier.entity.model.OrderItem;
 import com.example.dronecourier.entity.model.enums.OrderStatus;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/orders")
+@RequestMapping("api/orders")
 @RequiredArgsConstructor
 public class OderController {
     private final OrderService orderService;
@@ -37,11 +38,6 @@ public class OderController {
         return orderService.getAll();
     }
 
-    private OrderDto translateToDto(Order order) {
-        OrderDto dto = new OrderDto();
-
-        return dto;
-    }
 
     private Order translateToEntity(OrderDto dto) {
         Order order = new Order();
@@ -63,6 +59,18 @@ public class OderController {
         orderItem.setOrder(order);
 
         return orderItem;
+    }
+
+    private OrderDtoResponse translateToDto(Order order){
+        OrderDtoResponse orderDtoResponse = new OrderDtoResponse();
+
+        orderDtoResponse.setItems(order.getItems());
+        orderDtoResponse.setStatus(order.getStatus().getName());
+        orderDtoResponse.setArrivalDate(order.getArrivalDate());
+        orderDtoResponse.setId(order.getId());
+
+        return orderDtoResponse;
+
     }
 
 }

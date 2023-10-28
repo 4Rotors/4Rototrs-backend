@@ -1,4 +1,4 @@
-package com.example.dronecourier.entity.dto;
+package com.example.dronecourier.entity.dto.order;
 
 import com.example.dronecourier.entity.model.OrderItem;
 import lombok.Data;

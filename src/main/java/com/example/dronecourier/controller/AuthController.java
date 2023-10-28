@@ -5,16 +5,13 @@ import com.example.dronecourier.entity.dto.EmployeeDto;
 import com.example.dronecourier.entity.dto.JwtResponse;
 import com.example.dronecourier.entity.dto.RefreshJwtRequest;
 import com.example.dronecourier.service.AuthService;
-import com.example.dronecourier.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/auth")
+@CrossOrigin
 public class AuthController {
 
     private final AuthService authService;

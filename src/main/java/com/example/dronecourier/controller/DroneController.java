@@ -16,6 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/drones")
 @RequiredArgsConstructor
+@CrossOrigin
 public class DroneController {
     private final DroneService droneService;
 
