@@ -1,5 +1,6 @@
 package com.example.dronecourier.controller;
 
+import com.example.dronecourier.controller.api.DroneApi;
 import com.example.dronecourier.entity.dto.drone.DroneCreateUpdateRequestDto;
 import com.example.dronecourier.entity.dto.drone.DroneResponseDto;
 import com.example.dronecourier.entity.model.Drone;
@@ -17,7 +18,7 @@ import java.util.List;
 @RequestMapping("/api/drones")
 @RequiredArgsConstructor
 @CrossOrigin
-public class DroneController {
+public class DroneController implements DroneApi {
     private final DroneService droneService;
 
     @GetMapping()

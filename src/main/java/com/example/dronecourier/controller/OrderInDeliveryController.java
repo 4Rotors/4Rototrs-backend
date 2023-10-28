@@ -1,5 +1,6 @@
 package com.example.dronecourier.controller;
 
+import com.example.dronecourier.controller.api.OrderInDeliveryApi;
 import com.example.dronecourier.entity.dto.PointDto;
 import com.example.dronecourier.entity.dto.TrackNumberDto;
 import com.example.dronecourier.service.OrderInDeliveryService;
@@ -13,7 +14,7 @@ import java.util.Random;
 @RestController
 @RequestMapping("api/order_in_delivery")
 @RequiredArgsConstructor
-public class OrderInDeliveryController {
+public class OrderInDeliveryController implements OrderInDeliveryApi {
 
     private final OrderInDeliveryService orderInDeliveryService;
 

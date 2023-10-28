@@ -1,5 +1,6 @@
 package com.example.dronecourier.controller;
 
+import com.example.dronecourier.controller.api.AuthApi;
 import com.example.dronecourier.entity.dto.AuthDto;
 import com.example.dronecourier.entity.dto.EmployeeDto;
 import com.example.dronecourier.entity.dto.JwtResponse;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("api/auth")
 @CrossOrigin
-public class AuthController {
+public class AuthController implements AuthApi {
 
     private final AuthService authService;
 

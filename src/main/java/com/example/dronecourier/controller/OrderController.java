@@ -1,5 +1,6 @@
 package com.example.dronecourier.controller;
 
+import com.example.dronecourier.controller.api.OrderApi;
 import com.example.dronecourier.entity.dto.OrderItemDto;
 import com.example.dronecourier.entity.dto.order.OrderDto;
 import com.example.dronecourier.entity.dto.order.OrderDtoResponse;
@@ -20,7 +21,7 @@ import java.util.List;
 @RequestMapping("api/orders")
 @RequiredArgsConstructor
 @CrossOrigin
-public class OrderController {
+public class OrderController implements OrderApi {
     private final OrderService orderService;
     private final OrderItemService orderItemService;
 
@@ -37,7 +38,7 @@ public class OrderController {
     }
 
     @GetMapping
-    public List<OrderDtoResponse> getAll(){
+    public List<OrderDtoResponse> getAll() {
         List<Order> orders = orderService.getAll();
         List<OrderDtoResponse> result = new ArrayList<>();
         for(Order order : orders){
