@@ -1,6 +1,6 @@
 package com.example.dronecourier.entity.dto.order;
 
-import com.example.dronecourier.entity.model.OrderItem;
+import com.example.dronecourier.entity.dto.OrderItemDto;
 import lombok.Data;
 
 import java.util.List;
@@ -10,6 +10,6 @@ public class OrderDtoResponse {
     private Long id;
     private String deliveryAddress;
     private String arrivalDate;
-    private List<OrderItem> items;
+    private List<OrderItemDto> items;
     private String status;
 }

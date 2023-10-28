@@ -44,7 +44,7 @@ public class SecurityConfig {
                                 .requestMatchers("/api-docs/**", "/swagger-ui/**", "/swagger-ui.html",
                                         "/api/orders/create").permitAll()
                                 .requestMatchers("/api/auth/signUp").permitAll()
-                                .anyRequest().authenticated()
+                                .anyRequest().permitAll()
                 )
                 .exceptionHandling(
                         exc -> exc.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))

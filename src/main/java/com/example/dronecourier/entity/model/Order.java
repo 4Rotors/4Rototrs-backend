@@ -30,4 +30,6 @@ public class Order {
     @Column(name = "arrival_date")
     private String arrivalDate;
 
+    @OneToMany(mappedBy = "order")
+    private List<OrderItem> items;
 }

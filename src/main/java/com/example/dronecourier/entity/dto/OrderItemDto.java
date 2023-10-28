@@ -3,9 +3,9 @@ package com.example.dronecourier.entity.dto;
 import lombok.Data;
 
 @Data
-public class OderItemDto {
+public class OrderItemDto {
     private String name;
     private Integer count;
-    private Integer price;
+    private Double price;
     private Integer weight;
 }

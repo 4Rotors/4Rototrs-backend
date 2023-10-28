@@ -1,5 +1,6 @@
 package com.example.dronecourier.controller;
 
+import com.example.dronecourier.entity.dto.OrderItemDto;
 import com.example.dronecourier.entity.dto.order.OrderDto;
 import com.example.dronecourier.entity.dto.order.OrderDtoResponse;
 import com.example.dronecourier.entity.model.Order;
@@ -19,7 +20,7 @@ import java.util.List;
 @RequestMapping("api/orders")
 @RequiredArgsConstructor
 @CrossOrigin
-public class OderController {
+public class OrderController {
     private final OrderService orderService;
     private final OrderItemService orderItemService;
 
@@ -46,7 +47,7 @@ public class OderController {
             orderDtoResponse.setDeliveryAddress(order.getDeliveryAddress());
             orderDtoResponse.setArrivalDate(order.getArrivalDate());
             orderDtoResponse.setStatus(order.getStatus().getName());
-            orderDtoResponse.setItems(orderItemService.getItemsByOrder(order));
+            orderDtoResponse.setItems(orderItemService.getItemsByOrder(order).stream().map(this::translateToDto).toList());
 
             result.add(orderDtoResponse);
         }
@@ -64,7 +65,7 @@ public class OderController {
         return order;
     }
 
-    private OrderItem translateToEntity(OrderItem dto, Order order) {
+    private OrderItem translateToEntity(OrderItemDto dto, Order order) {
         OrderItem orderItem = new OrderItem();
 
         orderItem.setName(dto.getName());
@@ -85,6 +86,17 @@ public class OderController {
 
         return orderDtoResponse;
 
+    }
+
+    public OrderItemDto translateToDto(OrderItem item){
+        OrderItemDto itemDto = new OrderItemDto();
+
+        itemDto.setName(item.getName());
+        itemDto.setPrice(item.getPrice());
+        itemDto.setCount(item.getCount());
+        itemDto.setWeight(item.getWeight());
+
+        return itemDto;
     }
 
 }
