@@ -6,4 +6,5 @@ RUN mvn clean package -DskipTests
 FROM amazoncorretto:17-alpine-jdk
 WORKDIR "/app"
 COPY --from=builder /target/*.jar /drone-courier-0.0.1-SNAPSHOT.jar
+EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "/drone-courier-0.0.1-SNAPSHOT.jar"]
