@@ -4,6 +4,9 @@ spring:
     driver-class-name: org.postgresql.Driver
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
+    logging:
+      level:
+        org.springframework.security.web: DEBUG
   jpa:
     hibernate:
       ddl-auto: validate
@@ -19,5 +22,5 @@ springdoc:
     path: /swagger-ui.html
   api-docs:
     path: /api-docs
-access_token: ${ACCESS_TOKEN}
-refresh_token: ${REFRESH_TOKEN}
+access_token: 95Pol70Mvwlqp44evymFD6hACz1Prsko+0y4+cqN4obK2/jnWTJD/pmgUl99mINHWfvSGrJqZBZbT+DEd0vmaA==
+refresh_token: W3H2tdRbjlBy2FsdJF28bxjgJyiSmVM+jcM7+CByFIszEqcYLemnMVoUJTNDFI2lFMt9ROoCUL8eVFPMqvfZuQ==
