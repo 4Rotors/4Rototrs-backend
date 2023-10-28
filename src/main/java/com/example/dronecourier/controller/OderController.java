@@ -17,6 +17,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/orders")
 @RequiredArgsConstructor
+@CrossOrigin
 public class OderController {
     private final OrderService orderService;
     private final OrderItemService orderItemService;
@@ -34,8 +35,8 @@ public class OderController {
     }
 
     @GetMapping
-    public List<Order> getAll(){
-        return orderService.getAll();
+    public List<OrderDtoResponse> getAll(){
+        return null;
     }
 
 
@@ -64,7 +65,6 @@ public class OderController {
     private OrderDtoResponse translateToDto(Order order){
         OrderDtoResponse orderDtoResponse = new OrderDtoResponse();
 
-        orderDtoResponse.setItems(order.getItems());
         orderDtoResponse.setStatus(order.getStatus().getName());
         orderDtoResponse.setArrivalDate(order.getArrivalDate());
         orderDtoResponse.setId(order.getId());

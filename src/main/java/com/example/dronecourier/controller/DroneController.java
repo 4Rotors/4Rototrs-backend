@@ -16,7 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/drones")
 @RequiredArgsConstructor
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:8080/api/drones", allowCredentials = "true")
 public class DroneController {
     private final DroneService droneService;
 
