@@ -56,7 +56,7 @@ public class OrderInDeliveryController implements OrderInDeliveryApi {
     }
 
     @GetMapping("/send/{orderId}")
-    public OrderInDeliveryDto calculateDrone(@PathVariable("orderId") Long id) {
+    public OrderInDeliveryDto getDroneForOrder(@PathVariable("orderId") Long id) {
         Order order = orderService.getOrder(id);
         List<OrderItem> items = orderItemService.getItemsByOrder(order);
         List<Drone> drones = droneService.getAll();
@@ -77,7 +77,7 @@ public class OrderInDeliveryController implements OrderInDeliveryApi {
         return new OrderInDeliveryDto(trackNumber, droneId,  drone.getName());
     }
 
-    @DeleteMapping("/complete")
+    @PatchMapping("/complete")
     public ResponseEntity<HttpStatus> completeOrder(@RequestBody OrderCompleteDto dto){
         Order order = orderService.getOrder(dto.getDroneId());
         Drone drone = droneService.getById(dto.getDroneId());
