@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -36,7 +37,20 @@ public class OderController {
 
     @GetMapping
     public List<OrderDtoResponse> getAll(){
-        return null;
+        List<Order> orders = orderService.getAll();
+        List<OrderDtoResponse> result = new ArrayList<>();
+        for(Order order : orders){
+            OrderDtoResponse orderDtoResponse = new OrderDtoResponse();
+
+            orderDtoResponse.setId(order.getId());
+            orderDtoResponse.setDeliveryAddress(order.getDeliveryAddress());
+            orderDtoResponse.setArrivalDate(order.getArrivalDate());
+            orderDtoResponse.setStatus(order.getStatus().getName());
+            orderDtoResponse.setItems(orderItemService.getItemsByOrder(order));
+
+            result.add(orderDtoResponse);
+        }
+        return result;
     }
 
 
