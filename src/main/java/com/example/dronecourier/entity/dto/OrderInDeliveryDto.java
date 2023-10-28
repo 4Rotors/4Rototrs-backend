@@ -4,8 +4,7 @@ import lombok.Data;
 
 @Data
 public class OrderInDeliveryDto {
-    private Long id;
-    private String location;
-    private Long orderId;
+    private String trackNumber;
     private Long droneId;
+    private String droneName;
 }

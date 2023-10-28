@@ -1,8 +1,14 @@
 package com.example.dronecourier.controller;
 
+import com.example.dronecourier.entity.dto.OrderInDeliveryDto;
 import com.example.dronecourier.entity.dto.PointDto;
 import com.example.dronecourier.entity.dto.TrackNumberDto;
+import com.example.dronecourier.entity.model.Drone;
+import com.example.dronecourier.entity.model.Order;
+import com.example.dronecourier.entity.model.OrderItem;
 import com.example.dronecourier.service.OrderInDeliveryService;
+import com.example.dronecourier.service.OrderItemService;
+import com.example.dronecourier.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,9 +19,11 @@ import java.util.Random;
 @RestController
 @RequestMapping("api/order_in_delivery")
 @RequiredArgsConstructor
+@CrossOrigin
 public class OrderInDeliveryController {
 
-    private final OrderInDeliveryService orderInDeliveryService;
+    private final OrderService orderService;
+    private final OrderItemService orderItemService;
 
     @PostMapping("/location")
     public PointDto getLocation(@RequestBody TrackNumberDto trackNumberDto) {
@@ -37,5 +45,13 @@ public class OrderInDeliveryController {
             return points.get(rnd);
         }
         return new PointDto(1d, 1d);
+    }
+
+    @GetMapping("/drone/{id}")
+    public OrderInDeliveryDto calculateDrone(@PathVariable("id")  Long id){ // { "id": 1 }
+        Order order = orderService.getOrder(id);
+        List<OrderItem> items = orderItemService.getItemsByOrder(order);
+        //List<Drone>
+        return null;
     }
 }
