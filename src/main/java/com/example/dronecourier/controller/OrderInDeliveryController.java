@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Random;
 
 @RestController
-@RequestMapping("/order_in_delivery")
+@RequestMapping("api/order_in_delivery")
 @RequiredArgsConstructor
 public class OrderInDeliveryController {
 

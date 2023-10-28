@@ -5,6 +5,7 @@ import com.example.dronecourier.entity.mapper.EmployeeMapper;
 import com.example.dronecourier.entity.model.Employee;
 import com.example.dronecourier.repository.EmployeeRepository;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,7 @@ public class EmployeeService {
                 new EntityNotFoundException("An employee with this ID was not found: " + id))));
     }
 
+    @Transactional
     public Employee save(EmployeeDto employeeDTO) {
         Employee employee = employeeMapper.toEntity(employeeDTO);
         employee.setPassword(encoder.encode(employeeDTO.getPassword()));
@@ -36,19 +38,8 @@ public class EmployeeService {
         return employee;
     }
 
-    public EmployeeDto updateEmployee(EmployeeDto employee) {
-        return employeeRepository
-                .findById(employee.getId())
-                .map(existingEvent -> {
-                    employeeMapper.partialUpdate(existingEvent, employee);
 
-                    return existingEvent;
-                })
-                .map(employeeRepository::save)
-                .map(employeeMapper::toDto).orElseThrow(
-                        EntityNotFoundException::new);
-    }
-
+    @Transactional
     public void deleteEmployee(Long id) {
         employeeRepository
                 .findById(id)
