@@ -5,3 +5,5 @@ HELP.md
 mvnw
 mvnw.cmd
 application-local.properties
+docker-compose.yml
+Dockerfile
